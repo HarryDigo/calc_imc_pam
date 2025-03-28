@@ -17,16 +17,16 @@ const FormBMI = () => {
     }
 
     return (
-        <View>
+        <View style={styles.form_container}>
             <TextInput
-                style={StyleSheet.input}
+                style={styles.input}
                 placeholder='Peso (kg)'
                 keyboardType='numeric'
                 value={weight}
                 onChangeText={set_weight}
             />
             <TextInput
-                style={StyleSheet.input}
+                style={styles.input}
                 placeholder='Altura (cm)'
                 keyboardType='numeric'
                 value={height}
