@@ -1,4 +1,4 @@
-import { Text, StyleSheet, useColorScheme } from 'react-native';
+import { Text, StyleSheet, useColorScheme } from 'react-native'; //Comentar!!!
 
 const Title = () => {
     const theme = useColorScheme();

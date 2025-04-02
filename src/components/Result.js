@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; //Comentar!!!
 import { Text, StyleSheet } from 'react-native';
 
 const Result = ({ bmi }) => {

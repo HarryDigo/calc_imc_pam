@@ -1,34 +1,38 @@
 import { useState } from 'react';
-import { Appearance, Button, StyleSheet, View } from 'react-native';
+import { Appearance, StyleSheet, View } from 'react-native';
 
+import FloatingButton from './components/FloatingButton';
 import FormBMI from './components/FormBMI';
 import Title from './components/Title';
-import FloatingButton from './components/FloatingButton';
 
 export default function App() {
-    const [theme, setTheme] = useState('dark');
-    Appearance.setColorScheme(theme);
+    const [theme, set_theme] = useState(Appearance.getColorScheme() || 'dark'); //tema local, escuro se não definido
+    Appearance.setColorScheme(theme); //inicializa o tema do app
 
     return (
-        <View style={[styles.container, theme === 'light' ? styles.container_light : styles.container_dark]}>
+        <View style={[
+            styles.container, 
+            theme === 'light' ?  //seleciona o estilo de acordo com o tema
+            styles.container_light : 
+            styles.container_dark
+        ]}>
             <Title />
             <FormBMI />
-            <FloatingButton onPress={() => {
-                theme === 'light' ? setTheme('dark') : setTheme('light');
-                Appearance.setColorScheme(theme);
-            }} />
+            <FloatingButton onPress={() => { //inverte o tema (local) quando pressionado
+                set_theme(theme === 'light' ? 'dark' : 'light'); 
+            }}/>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
+    container: { //estilo da view principaç
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         padding: 16,
     },
-    container_light: {
+    container_light: { //estilo da view de acordo com o tema
         backgroundColor: '#fff',
         color: '#000',
     },
