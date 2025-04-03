@@ -8,7 +8,7 @@ const ErrorMessage = ({ error }) => {
 };
 
 const styles = StyleSheet.create({
-    error: {
+    error: { //estilo do texto
         marginTop: 15,
         fontSize: 14,
         textAlign: 'center',

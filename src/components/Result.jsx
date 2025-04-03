@@ -1,4 +1,4 @@
-import React from "react"; //Comentar!!!
+import React from "react";
 import { Text, StyleSheet } from 'react-native';
 
 const Result = ({ bmi }) => {
@@ -8,7 +8,7 @@ const Result = ({ bmi }) => {
 };
 
 const styles = StyleSheet.create({
-    result: {
+    result: { //estilo do texto
         marginTop: 20,
         fontSize: 24,
         textAlign: 'center',

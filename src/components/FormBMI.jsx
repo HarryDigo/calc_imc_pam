@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, StyleSheet, TextInput, View } from 'react-native';
 
 import Classification from './Classification';
 import ErrorMessage from './ErrorMessage';
+import IdealWeight from './IdealWeight';
 import Result from './Result';
 
 const FormBMI = () => {
@@ -12,21 +13,30 @@ const FormBMI = () => {
 
     const [error, set_error] = useState(''); //estado do erro, se houver
 
+    useEffect(() => { //se algum for apagado, limpa o imc (sem msg de erro)
+        if(!weight || !height) {
+            set_bmi(null);
+        }
+    }, [weight, height]);
+
     const calc_bmi = () => {
         if (weight && height) {
-            if (isNaN(weight) || isNaN(height)) {
+            const new_weight = weight.replace(/,/g, '.'); //troca , por . para conversão
+            const new_height = height.replace(/,/g, '.');
+
+            if (isNaN(new_weight) || isNaN(new_height)) {
                 set_bmi(null); //limpa o imc (igual no outros)
                 set_error('Peso e altura devem ser números.'); //se não forem números, mostra mensagem de erro
                 return;
             }
-            if (parseFloat(weight) <= 0 || parseFloat(height) <= 0) {
+            if (parseFloat(new_weight) <= 0 || parseFloat(new_height) <= 0) {
                 set_bmi(null);
                 set_error('Peso e altura devem ser maiores que zero.'); //se forem menores ou iguais a zero, mostra mensagem de erro
                 return;
             }
             //calcula e atualiza o imc
-            const height_metric = parseFloat(height) / 100;
-            const bmi_result = (parseFloat(weight) / Math.pow(height_metric, 2)).toFixed(2);
+            const height_metric = parseFloat(new_height) / 100;
+            const bmi_result = (parseFloat(new_weight) / Math.pow(height_metric, 2)).toFixed(2);
             set_bmi(bmi_result);
             set_error(''); //limpa a mensagem de erro
         } else {
@@ -52,12 +62,13 @@ const FormBMI = () => {
                 onChangeText={set_height}
             />
             <Button color={"rgb(172, 104, 235)"} title='Calcular IMC' onPress={calc_bmi} />
-
-            {/*mostra resultado e classificação se o imc foi calculado*/}
+        
+            {/* mostra resultado, classificação e peso ideal se o imc foi calculado */}
             {bmi ? <Result bmi={bmi} /> : null}
             {bmi ? <Classification bmi={bmi} /> : null}
-            {/*fazer tudo do peso ideal!!!*/}
-            {error ? <ErrorMessage error={error} /> : null} {/*se houver erro, mostra mensagem de erro*/}
+            {bmi ? <IdealWeight height={height} /> : null}
+            {/*se houver erro, mostra mensagem de erro*/}
+            {error ? <ErrorMessage error={error} /> : null}
         </View>
     );
 };

@@ -1,13 +1,11 @@
-import { useState } from 'react';
-import { Appearance, StyleSheet, View } from 'react-native';
+import { StyleSheet, View, useColorScheme } from 'react-native';
 
 import FloatingButton from './components/FloatingButton';
 import FormBMI from './components/FormBMI';
 import Title from './components/Title';
 
 export default function App() {
-    const [theme, set_theme] = useState(Appearance.getColorScheme() || 'dark'); //tema local, escuro se não definido
-    Appearance.setColorScheme(theme); //inicializa o tema do app
+    const theme = useColorScheme(); //usa o tema do aplicativo
 
     return (
         <View style={[
@@ -18,9 +16,7 @@ export default function App() {
         ]}>
             <Title />
             <FormBMI />
-            <FloatingButton onPress={() => { //inverte o tema (local) quando pressionado
-                set_theme(theme === 'light' ? 'dark' : 'light'); 
-            }}/>
+            <FloatingButton onPress={() => {}} />
         </View>
     )
 }

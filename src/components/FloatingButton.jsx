@@ -3,6 +3,8 @@ import { Appearance, Image, Pressable, StyleSheet } from "react-native";
 
 function FloatingButton({ onPress }) {
     const [theme, set_theme] = useState(Appearance.getColorScheme() || 'dark'); //estado do tema, escuro se não definido
+    Appearance.setColorScheme(theme);
+    
     const [isPressed, set_is_pressed] = useState(false); //estado do botão (usado para manter o estilo do botão pressionado)
 
     return ( //retorna o botão flutuante
@@ -14,7 +16,7 @@ function FloatingButton({ onPress }) {
                 set_theme(theme === 'light' ? 'dark' : 'light'); //inverte o tema
                 Appearance.setColorScheme(theme); //altera o tema do app
                 set_is_pressed(false);
-                onPress(); //para atualizar o tema no App.js
+                onPress();
             }}
 
             android_ripple={{ color: "rgba(0, 0, 0, 0.2)", radius: 40 }} //coisinho de onda de quando aperta o botão

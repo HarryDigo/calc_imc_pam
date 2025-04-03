@@ -1,8 +1,8 @@
-import React from "react"; //Comentar!!!
+import React from "react";
 import { Text, StyleSheet } from 'react-native';
 
 const Classification = ({ bmi }) => {
-    let classification = '';
+    let classification = ''; //coisão de definir a classe
     if (bmi < 18.5) {
         classification = 'Abaixo do peso';
     } else if (bmi < 25) {
@@ -23,7 +23,7 @@ const Classification = ({ bmi }) => {
 };
 
 const styles = StyleSheet.create({
-    class: {
+    class: { //estilo do texto
         marginTop: 6,
         fontSize: 20,
         textAlign: 'center',

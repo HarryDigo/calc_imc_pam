@@ -1,9 +1,9 @@
 import { Text, StyleSheet, useColorScheme } from 'react-native'; //Comentar!!!
 
 const Title = () => {
-    const theme = useColorScheme();
+    const theme = useColorScheme(); //usa o tema do aplicativo
 
-    return (
+    return ( //
         <Text style={[styles.title, theme === 'light' ? styles.title_light : styles.title_dark]}>Calculadora de IMC</Text>
     );
 };
